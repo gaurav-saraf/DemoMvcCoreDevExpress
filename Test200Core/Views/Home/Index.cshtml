@@ -1,0 +1,22 @@
+@using Test200Core.Models
+
+<h2>Customers</h2>
+
+@(Html.DevExtreme().DataGrid<Customer>()
+        .ShowBorders(true)
+        .DataSource(d => d.Mvc().Controller("Customer").LoadAction("Get").Key("CustomerId"))
+        .Columns(columns =>
+        {
+            columns.AddFor(m => m.CustomerId);
+            columns.AddFor(m => m.Name);
+            columns.AddFor(m => m.EmailAddress);
+            columns.AddFor(m => m.City);
+            columns.AddFor(m => m.CreatedOn);
+        })
+        .Paging(p => p.PageSize(10))
+        .FilterRow(f => f.Visible(true))
+        .HeaderFilter(f => f.Visible(true))
+        .GroupPanel(p => p.Visible(false))
+        .Grouping(g => g.AutoExpandAll(false))
+        .RemoteOperations(true)
+)
